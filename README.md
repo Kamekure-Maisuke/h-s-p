@@ -25,8 +25,8 @@ $ docker-compose up -d
 ### svelte
 
 ```bash
-# package install。「npm ci」がダメなら、「npm install」を入力。
-$ npm ci
+# package install。
+$ npm install
 # 開発サーバー起動
 $ npm run dev
 ```
