@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+  db:
+    image: postgres:12-alpine
+    ports:
+      - 5432:5432
+    restart: always
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./initdb:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_PASSWORD: test
+  graphql-engine:
+    image: hasura/graphql-engine:v1.1.0
+    ports:
+      - 8080:8080
+    links:
+      - "db"
+    restart: always
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:test@db:5432/blog
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+volumes:
+  db_data:
