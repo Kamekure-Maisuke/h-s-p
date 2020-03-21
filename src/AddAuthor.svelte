@@ -27,7 +27,6 @@
         mutation: ADD_AUTHOR,
         variables: { name }
       });
-      alert("Added successfully");
       const finalData = authorCache.data.author;
       finalData.push({name, '__typename': 'author'});
       restore(client, AUTHOR_LIST, {author: finalData});

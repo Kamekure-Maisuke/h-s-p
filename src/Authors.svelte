@@ -4,7 +4,7 @@
 
   const AUTHOR_LIST = gql`
     query {
-      author(order_by: [{name: asc}]) {
+      author {
         name
       }
     }
@@ -31,7 +31,7 @@
   {#await $authors}
     <li>Loading...</li>
   {:then result}
-    {#each result.data.author as author (author.id)}
+    {#each result.data.author as author}
       <li>{author.name}</li>
     {:else}
       <li>No authors found</li>
